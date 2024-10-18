@@ -10,12 +10,11 @@
 </template>
 
 <script lang="ts" setup>
-import styles from './Text.module.css';
-import { TypographyProps, Typography } from '../Typography';
+  import styles from './Text.module.css';
+  import { Typography } from '../Typography';
+  import type { TextProps } from './Text';
 
-type TextProps = Omit<TypographyProps, 'plain'>
-
-withDefaults(defineProps<TextProps>(), {
-  component: 'span',
-});
+  withDefaults(defineProps<TextProps>(), {
+    component: 'span',
+  });
 </script>
