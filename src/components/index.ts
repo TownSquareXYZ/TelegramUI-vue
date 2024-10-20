@@ -1,2 +1,9 @@
-export * from './Service/index';
-export * from './Typography/index';
+// export * from './Blocks';
+// export * from './Feedback';
+// export * from './Form';
+// export * from './Layout';
+// export * from './Misc';
+// export * from './Navigation';
+// export * from './Overlays';
+export * from './Service';
+export * from './Typography';

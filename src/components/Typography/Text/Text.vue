@@ -11,8 +11,9 @@
 
 <script lang="ts" setup>
   import styles from './Text.module.css';
-  import { Typography } from '../Typography';
-  import type { TextProps } from './Text';
+  import { Typography, TypographyProps } from '../Typography';
+
+  export type TextProps = Omit<TypographyProps, 'plain'>
 
   withDefaults(defineProps<TextProps>(), {
     component: 'span',

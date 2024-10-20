@@ -1,5 +1,5 @@
 import Text from './Text.vue';
-import type { TextProps } from './Text';
+import type { TextProps } from './Text.vue';
 
 export {
     Text,

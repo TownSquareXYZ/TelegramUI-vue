@@ -12,9 +12,17 @@
 <script lang="ts" setup>
   import { computed } from 'vue';
   import styles from './Title.module.css';
-  import { Typography } from '../Typography';
-  import type { TitleProps, TitleLevel } from './Title';
+  import { Typography, TypographyProps } from '../Typography';
+ 
   
+  type TitleLevel = '1' | '2' | '3';
+
+  export interface TitleProps extends TypographyProps {
+    /** 
+     * Determines the size and semantic tag of the title, with options for `h2`, `h3`, or `h4`. 
+    */
+    level?: TitleLevel;
+  }
   
   const props = withDefaults(defineProps<TitleProps>(), {
     level: '2',
