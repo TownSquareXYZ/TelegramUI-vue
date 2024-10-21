@@ -23,7 +23,7 @@
   import AvatarBadge from './components/AvatarBadge/AvatarBadge.vue';
   import styles from './Avatar.module.css';
   
-  interface AvatarProps extends ImageProps {
+  export interface AvatarProps extends ImageProps {
     /** One or two letters to be shown as a placeholder. `fallbackIcon` will not be used if `acronym` is provided. */
     acronym?: string;
   }
