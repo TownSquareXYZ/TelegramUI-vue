@@ -25,7 +25,7 @@
   import { usePlatform } from '../../../hooks/usePlatform';
   import { VisuallyHidden } from '../../Service/VisuallyHidden';
 
-  interface SwitchProps {
+  export interface SwitchProps {
     disabled?: boolean;
   }
   
