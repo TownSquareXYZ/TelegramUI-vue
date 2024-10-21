@@ -1,5 +1,5 @@
 export * from './Blocks';
-// export * from './Feedback';
+export * from './Feedback';
 // export * from './Form';
 // export * from './Layout';
 // export * from './Misc';

@@ -19,14 +19,12 @@
   import { usePlatform } from '../../../hooks/usePlatform';
   import { BaseSpinner } from './components/BaseSpinner';
   import { IOSSpinner } from './components/IOSSpinner';
+
+  export interface SpinnerProps {  
+    size?: 's' | 'm' | 'l';
+  }
   
-  const props = withDefaults(defineProps<{
-    /**
-     * Determines the size of the spinner. Can be 'small' (s), 'medium' (m), or 'large' (l).
-     */
-    size?: 's' | 'm' | 'l',
-  }>(), { size: 'm' });
-  
+  const props = withDefaults(defineProps<SpinnerProps>(), { size: 'm' });
   const platform = usePlatform();
   
   const sizeStyles = {
