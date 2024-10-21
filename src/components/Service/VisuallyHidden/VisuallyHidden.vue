@@ -12,12 +12,10 @@
   
 <script lang="ts" setup>
   import styles from './VisuallyHidden.module.css';
+
+  export interface VisuallyHiddenProps {  
+    component?: string;
+  }
   
-  withDefaults(defineProps<{
-    /**
-     * The HTML element to render
-     */
-    component?: string,
-  }>(), { component: 'span' });
-  
+  withDefaults(defineProps<VisuallyHiddenProps>(), { component: 'span' });
 </script>

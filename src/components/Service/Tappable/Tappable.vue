@@ -24,7 +24,7 @@
   import Ripple from './components/Ripple/Ripple.vue'
   import styles from './Tappable.module.css';
   
-  interface TappableProps extends /* @vue-ignore */ TextareaHTMLAttributes{
+  export interface TappableProps extends /* @vue-ignore */ TextareaHTMLAttributes{
     Component?: string;
     interactiveAnimation?: 'opacity' | 'background';
   }
