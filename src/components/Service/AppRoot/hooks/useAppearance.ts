@@ -62,5 +62,5 @@ export function useAppearance(appearanceProp?: AppRootState['appearance']): NonN
         }
     }
 
-    return appearance
+    return appearance.value
 }
