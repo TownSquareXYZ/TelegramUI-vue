@@ -1,13 +1,36 @@
 {
-  "name": "telegram-ui-vue",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "@townsquarelabs/telegram-ui-vue",
+  "version": "0.0.1",
+  "description": "World-class, ultimate UI developer toolkit.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "./dist"
+  ],
+  "sideEffects": [
+    "./dist/index.js",
+    "./dist/cjs/index.js"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=7.0.0"
+  },
   "scripts": {
     "build": "vue-tsc -b && vite build",
     "dev": "storybook dev -p 6006",
     "storybook:build": "storybook build"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:TownSquareLabs/telegram-ui-vue.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TownSquareLabs/telegram-ui-vue/issues"
+  },
+  "homepage": "https://github.com/TownSquareLabs/telegram-ui-vue#readme",
   "dependencies": {
     "@floating-ui/vue": "^1.1.4",
     "@twa-dev/types": "^7.10.0",
