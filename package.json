@@ -17,7 +17,10 @@
     "npm": ">=7.0.0"
   },
   "scripts": {
-    "build": "vue-tsc -b && vite build",
+    "build": "",
+    "build:types": "concurrently 'npm run tsc:*'",
+    "tsc:es6": "cross-env NODE_ENV=production tsc --emitDeclarationOnly --declaration -p tsconfig.dist.json && tsc-alias",
+    "tsc:cjs": "cross-env NODE_ENV=production tsc --emitDeclarationOnly --declaration --outDir dist/cjs/ -p tsconfig.dist.json && tsc-alias",
     "dev": "storybook dev -p 6006",
     "storybook:build": "storybook build"
   },
@@ -47,9 +50,11 @@
     "@storybook/vue3": "^8.2.9",
     "@storybook/vue3-vite": "^8.2.9",
     "@vitejs/plugin-vue": "^5.1.2",
+    "concurrently": "^9.0.1",
+    "cross-env": "^7.0.3",
     "storybook": "^8.2.9",
+    "tsc-alias": "^1.8.10",
     "typescript": "^5.5.3",
-    "vite": "^5.4.1",
     "vue-tsc": "^2.0.29"
   }
 }
