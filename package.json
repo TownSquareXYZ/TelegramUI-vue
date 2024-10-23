@@ -19,8 +19,8 @@
   "scripts": {
     "build": "",
     "build:types": "concurrently 'npm run tsc:*'",
-    "tsc:es6": "cross-env NODE_ENV=production tsc --emitDeclarationOnly --declaration -p tsconfig.dist.json && tsc-alias",
-    "tsc:cjs": "cross-env NODE_ENV=production tsc --emitDeclarationOnly --declaration --outDir dist/cjs/ -p tsconfig.dist.json && tsc-alias",
+    "tsc:es6": "cross-env NODE_ENV=production vue-tsc --emitDeclarationOnly --declaration -p tsconfig.dist.json && tsc-alias",
+    "tsc:cjs": "cross-env NODE_ENV=production vue-tsc --emitDeclarationOnly --declaration --outDir dist/cjs/ -p tsconfig.dist.json && tsc-alias",
     "dev": "storybook dev -p 6006",
     "storybook:build": "storybook build"
   },
@@ -55,6 +55,6 @@
     "storybook": "^8.2.9",
     "tsc-alias": "^1.8.10",
     "typescript": "^5.5.3",
-    "vue-tsc": "^2.0.29"
+    "vue-tsc": "^2.1.6"
   }
 }

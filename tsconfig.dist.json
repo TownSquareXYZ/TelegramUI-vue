@@ -1,14 +1,28 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "dist",
-    "declarationMap": true
+    "target": "ES2015",
+    "lib": ["ES2015", "DOM"],
+    "module": "ESNext",
+    "outDir": "./dist",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "types": ["vite/client"]
   },
-  "include": ["src/**/*.vue"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.vue",
+  ],
   "exclude": [
     "node_modules",
-    "src/**/*.stories.ts*",
-    "src/**/*.test.ts*",
+    "dist",
+    "**/*.stories.ts",
+    "**/*.test.ts"
   ]
 }
