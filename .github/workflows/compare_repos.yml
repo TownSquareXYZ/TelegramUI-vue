@@ -3,31 +3,39 @@ name: Compare Repositories
 on:
   schedule:
     # Runs every Monday at 00:00 UTC
-    - cron: '0 0 * * MON'
-  workflow_dispatch:  # Add this to enable manual triggers
+    - cron: "0 0 * * MON"
+  workflow_dispatch: # Add this to enable manual triggers
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   compare:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write  # Add permissions to write to the repository
 
     steps:
       - name: Checkout Repository A
         uses: actions/checkout@v2
         with:
-          repository: Telegram-Mini-Apps/TelegramUI  # Fixed repository format
+          repository: Telegram-Mini-Apps/TelegramUI
           path: repoA
 
       - name: Checkout Repository B
         uses: actions/checkout@v2
         with:
-          repository: TownSquareXYZ/TelegramUI-vue  # Fixed repository format
+          repository: ${{ github.repository }}
           path: repoB
-          token: ${{ secrets.GITHUB_TOKEN }}  # Add token for authentication
-          fetch-depth: 0  # Fetch all history
+          token: ${{ github.token }}
+          fetch-depth: 0
+
+      - name: Install GitHub
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh
 
       - name: Compare Directory Names
+        id: compare
         run: |
           # Find all stories files in repoA and repoB
           componentsA=$(find repoA/src/components -type f -name "*.stories.*" | sed 's|.*/\([^/]*\)/[^/]*\.stories\..*|\1|' | sort -u)
@@ -59,28 +67,49 @@ jobs:
             done
           } > temp_table.md
 
-          # Replace content between markers in README.md
+          # Extract current content between markers (excluding end marker)
           awk '
-            BEGIN       {p=1}
-            /^## Rate of progress$/ {system("cat temp_table.md"); p=0}
-            /^## Installation$/     {p=1}
-            p==1        {print}
-          ' repoB/README.md > new_readme.md
+            /^## Rate of progress$/,/^## Installation$/ {
+              if ($0 != "## Installation") print
+            }
+          ' repoB/README.md > current_section.md
 
-          # Move new readme to original location
-          mv new_readme.md repoB/README.md
-          rm temp_table.md
+          echo "Current section: $(cat current_section.md)"
+          echo "New section: $(cat temp_table.md)"
 
-      - name: Commit Changes
-        run: |
-          cd repoB
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "Update README.md with differences between React and Vue implementations"
+          # Compare current section with new content
+          if ! cmp -s current_section.md temp_table.md; then
+            # Files are different, proceed with replacement
+            awk '
+              BEGIN       {p=1}
+              /^## Rate of progress$/ {system("cat temp_table.md"); p=0}
+              /^## Installation$/     {p=1}
+              p==1        {print}
+            ' repoB/README.md > new_readme.md
 
-      - name: Push Changes
-        working-directory: repoB  # Set working directory
-        run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/TownSquareXYZ/TelegramUI-vue.git
-          git push origin HEAD:main
+            mv new_readme.md repoB/README.md
+            echo "README.md has been updated with new progress table"
+
+            # Create a new branch and commit changes
+            cd repoB
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            
+            # Create a new branch with timestamp
+            branch_name="update-readme-$(date +%Y%m%d-%H%M%S)"
+            git checkout -b $branch_name
+            
+            git add README.md
+            git commit -m "Update README.md with differences between React and Vue implementations"
+            git push origin $branch_name
+
+            # Create Pull Request using GitHub CLI
+            gh auth login --with-token <<< "${{ github.token }}"
+            gh pr create \
+              --title "Update React vs Vue implementation progress" \
+              --body "Automated update of the implementation progress table in README.md" \
+              --base main \
+              --head $branch_name
+          else
+            echo "No components have been added or removed since last update"
+          fi
