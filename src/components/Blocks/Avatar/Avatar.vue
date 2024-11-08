@@ -20,7 +20,6 @@
   import Image from '../Image/Image.vue';
   import { ImageProps } from '../Image/image';
   import AvatarAcronym from './components/AvatarAcronym/AvatarAcronym.vue';
-  import AvatarBadge from './components/AvatarBadge/AvatarBadge.vue';
   import styles from './Avatar.module.css';
   
   export interface AvatarProps extends ImageProps {
@@ -35,8 +34,4 @@
       ? h(AvatarAcronym, { size: props.size as number }, () => props.acronym)
       : props.fallbackIcon
   );
-  
-  defineExpose({
-    Badge: AvatarBadge
-  });
 </script>
