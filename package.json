@@ -17,12 +17,12 @@
     "npm": ">=7.0.0"
   },
   "scripts": {
-    "build": "npm run build:types && npm run build:js-css",
+    "build": "npm run build:js-css && npm run build:types",
     "build:types": "concurrently 'npm run tsc:*'",
-    "build:js-css": "concurrently \"npm run vite:*\" \"npm run postcss\"",
+    "build:js-css": "concurrently \"npm run vite:*\"",
     "vite:es6": "vite build --config vite.config.ts",
     "vite:cjs": "vite build --config vite.config.ts --mode cjs",
-    "tsc:es6": "cross-env NODE_ENV=production vue-tsc --emitDeclarationOnly --declaration -p tsconfig.dist.json && tsc-alias",
+    "tsc:es6": "cross-env NODE_ENV=production vue-tsc --emitDeclarationOnly --declaration --outDir dist/ -p tsconfig.dist.json && tsc-alias",
     "tsc:cjs": "cross-env NODE_ENV=production vue-tsc --emitDeclarationOnly --declaration --outDir dist/cjs/ -p tsconfig.dist.json && tsc-alias",
     "dev": "storybook dev -p 6006",
     "storybook:build": "storybook build"
@@ -37,10 +37,12 @@
     "url": "https://github.com/TownSquareLabs/telegram-ui-vue/issues"
   },
   "homepage": "https://github.com/TownSquareLabs/telegram-ui-vue#readme",
+  "peerDependencies": {
+    "vue": "^3.4.37"
+  },
   "dependencies": {
     "@floating-ui/vue": "^1.1.4",
-    "@twa-dev/types": "^7.10.0",
-    "vue": "^3.4.37"
+    "@twa-dev/types": "^7.10.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.9.0",
@@ -60,5 +62,8 @@
     "typescript": "^5.5.3",
     "vue-tsc": "^2.1.6",
     "vite": "^5.1.4"
+  },
+  "resolutions": {
+    "vue": "^3.4.37"
   }
 }

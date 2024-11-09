@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       external: ['vue', '@floating-ui/vue', '@twa-dev/types'],
       output: {
+        exports: 'named',
         preserveModules: true,
         preserveModulesRoot: 'src',
         entryFileNames: ({ name }) => {
