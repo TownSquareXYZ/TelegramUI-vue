@@ -1,19 +1,48 @@
 {
-  "name": "telegram-ui-vue",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "@townsquarelabs/telegram-ui-vue",
+  "version": "0.0.1",
+  "description": "World-class, ultimate UI developer toolkit.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "./dist"
+  ],
+  "sideEffects": [
+    "./dist/index.js",
+    "./dist/cjs/index.js"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=7.0.0"
+  },
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build": "npm run build:js-css && npm run build:types",
+    "build:types": "concurrently 'npm run tsc:*'",
+    "build:js-css": "concurrently 'npm run vite:*'",
+    "vite:es6": "vite build --config vite.config.ts",
+    "vite:cjs": "vite build --config vite.config.ts --mode cjs",
+    "tsc:es6": "cross-env NODE_ENV=production vue-tsc --emitDeclarationOnly --declaration --outDir dist/ -p tsconfig.dist.json && tsc-alias",
+    "tsc:cjs": "cross-env NODE_ENV=production vue-tsc --emitDeclarationOnly --declaration --outDir dist/cjs/ -p tsconfig.dist.json && tsc-alias",
+    "dev": "storybook dev -p 6006",
+    "storybook:build": "storybook build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:TownSquareLabs/telegram-ui-vue.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TownSquareLabs/telegram-ui-vue/issues"
+  },
+  "homepage": "https://github.com/TownSquareLabs/telegram-ui-vue#readme",
+  "peerDependencies": {
+    "vue": "^3.4.37"
   },
   "dependencies": {
     "@floating-ui/vue": "^1.1.4",
-    "@twa-dev/types": "^7.10.0",
-    "vue": "^3.4.37"
+    "@twa-dev/types": "^7.10.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.9.0",
@@ -26,9 +55,15 @@
     "@storybook/vue3": "^8.2.9",
     "@storybook/vue3-vite": "^8.2.9",
     "@vitejs/plugin-vue": "^5.1.2",
+    "concurrently": "^9.0.1",
+    "cross-env": "^7.0.3",
     "storybook": "^8.2.9",
+    "tsc-alias": "^1.8.10",
     "typescript": "^5.5.3",
-    "vite": "^5.4.1",
-    "vue-tsc": "^2.0.29"
+    "vue-tsc": "^2.1.6",
+    "vite": "^5.1.4"
+  },
+  "resolutions": {
+    "vue": "^3.4.37"
   }
 }

@@ -13,7 +13,7 @@
   import styles from './Headline.module.css';
   import { TypographyProps, Typography } from '../Typography';
   
-  interface HeadlineProps extends TypographyProps {}
+  export interface HeadlineProps extends TypographyProps {}
   
   withDefaults(defineProps<HeadlineProps>(), {
     component: 'h5',

@@ -20,10 +20,9 @@
   import Image from '../Image/Image.vue';
   import { ImageProps } from '../Image/image';
   import AvatarAcronym from './components/AvatarAcronym/AvatarAcronym.vue';
-  import AvatarBadge from './components/AvatarBadge/AvatarBadge.vue';
   import styles from './Avatar.module.css';
   
-  interface AvatarProps extends ImageProps {
+  export interface AvatarProps extends ImageProps {
     /** One or two letters to be shown as a placeholder. `fallbackIcon` will not be used if `acronym` is provided. */
     acronym?: string;
   }
@@ -35,8 +34,4 @@
       ? h(AvatarAcronym, { size: props.size as number }, () => props.acronym)
       : props.fallbackIcon
   );
-  
-  defineExpose({
-    Badge: AvatarBadge
-  });
 </script>

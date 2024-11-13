@@ -16,7 +16,7 @@ import { TypographyProps, Typography } from '../Typography';
 
 type SubheadlineLevel = '1' | '2';
 
-interface SubheadlineProps extends TypographyProps {
+export interface SubheadlineProps extends TypographyProps {
     /** Determines the size of the subheadline, with `1` being the default and '2' providing a smaller option. */
     level?: SubheadlineLevel,
 }

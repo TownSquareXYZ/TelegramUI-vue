@@ -28,33 +28,29 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import styles from './CircularProgress.module.css';
-import { getCircleAttributes } from './helper/getCircleAttributes';
-
-const props = withDefaults(defineProps<{
-  /**
-   * Specifies the size of the circular progress indicator. Can be 'small', 'medium', or 'large'.
-   */
-  size?: 'small' | 'medium' | 'large',
-  /**
-   * Current progress of the circular indicator, expressed as a percentage from 0 to 100.
-   */
-  progress?: number
-}>(), {
-  size: 'medium',
-  progress: 0
-});
-
-const circleAttributes = computed(() => getCircleAttributes(props.size));
-
-const circleSize = computed(() => circleAttributes.value ? circleAttributes.value.size / 2 : 0);
-
-const circumference = computed(() => 
-  circleAttributes.value ? 2 * Math.PI * circleAttributes.value.radius : 0
-);
-
-const strokeDashoffset = computed(() => 
-  circumference.value * ((100 - props.progress) / 100)
-);
+  import { computed } from 'vue';
+  import styles from './CircularProgress.module.css';
+  import { getCircleAttributes } from './helper/getCircleAttributes';
+  
+  export interface CircularProgressProps {  
+    size?: 'small' | 'medium' | 'large';
+    progress?: number;
+  }
+  
+  const props = withDefaults(defineProps<CircularProgressProps>(), {
+    size: 'medium',
+    progress: 0
+  });
+  
+  const circleAttributes = computed(() => getCircleAttributes(props.size));
+  
+  const circleSize = computed(() => circleAttributes.value ? circleAttributes.value.size / 2 : 0);
+  
+  const circumference = computed(() => 
+    circleAttributes.value ? 2 * Math.PI * circleAttributes.value.radius : 0
+  );
+  
+  const strokeDashoffset = computed(() => 
+    circumference.value * ((100 - props.progress) / 100)
+  );
 </script>

@@ -1,0 +1,33 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "tsx": false,
+      "decorators": true,
+      "dynamicImport": true
+    },
+    "transform": {
+      "legacyDecorator": true,
+      "decoratorMetadata": true
+    },
+    "loose": false,
+    "externalHelpers": true,
+    "keepClassNames": true
+  },
+  "module": {
+    "type": "es6"
+  },
+  "minify": false,
+  "isModule": true,
+  "sourceMaps": true,
+  "exclude": [
+    "node_modules",
+    ".*.js$",
+    "dist"
+  ],
+  "env": {
+    "targets": {
+      "node": 18
+    }
+  }
+}

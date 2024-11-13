@@ -11,7 +11,7 @@
   import styles from './LargeTitle.module.css';
   import { TypographyProps, Typography } from '../Typography';
   
-  type LargeTitleProps = TypographyProps;
+  export type LargeTitleProps = TypographyProps;
 
   withDefaults(defineProps<LargeTitleProps>(), {
     component: 'h1',

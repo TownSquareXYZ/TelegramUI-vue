@@ -1,3 +1,6 @@
-import AppRoot from './AppRoot/AppRoot.vue';
+export * from './AppRoot';
+export * from './VisuallyHidden';
+export * from './Tappable';
 
-export { AppRoot };
+// export type { RootRendererProps } from './RootRenderer/RootRenderer';
+// export { RootRenderer } from './RootRenderer/RootRenderer';

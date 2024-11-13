@@ -13,21 +13,20 @@
 </template>
 
 <script lang="ts" setup>
-  import { PropType, ref } from 'vue'
+  import { ref } from 'vue'
   import { useAppearance } from './hooks/useAppearance'
   import { usePlatform } from './hooks/usePlatform'
   import { provideAppRoot, AppRootState } from './AppRootContext'
   import styles from './AppRoot.module.css';
   
-  const props = defineProps({
-    platform: {
-      type: String as PropType<AppRootState['platform']>,
-      default: "base" 
-    },
-    appearance: {
-      type: String as PropType<AppRootState['appearance']>,
-      default: "light"
-    }
+  export interface AppRootProps {
+    platform: AppRootState['platform'];
+    appearance: AppRootState['appearance'];
+  }
+  
+  const props = withDefaults(defineProps<AppRootProps>(),{
+    platform: "base",
+    appearance: "light"
   });
   
   const rootRef = ref<HTMLDivElement | null>(null);
