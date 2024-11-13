@@ -19,7 +19,7 @@
   "scripts": {
     "build": "npm run build:js-css && npm run build:types",
     "build:types": "concurrently 'npm run tsc:*'",
-    "build:js-css": "concurrently \"npm run vite:*\"",
+    "build:js-css": "concurrently 'npm run vite:*'",
     "vite:es6": "vite build --config vite.config.ts",
     "vite:cjs": "vite build --config vite.config.ts --mode cjs",
     "tsc:es6": "cross-env NODE_ENV=production vue-tsc --emitDeclarationOnly --declaration --outDir dist/ -p tsconfig.dist.json && tsc-alias",
